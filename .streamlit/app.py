@@ -44,7 +44,8 @@ if st.button("Generate"):
 st.subheader("💬 Chat with the Trend Engine")
 user_input = st.chat_input("Ask about NZ Christmas trends or generate a post...")
 if user_input:
-    from openai import ChatCompletion
+    from groq import Groq
+    groq_client = Groq(api_key=GROQ_API_KEY)
     chat_prompt = f"""
 You are a Christmas retail trend assistant focused on New Zealand audiences.
 
@@ -59,11 +60,9 @@ Use today's data to respond with either:
 - Or 2–3 creative lines that reflect current retail vibes in New Zealand
 
 Tone: festive, cheeky, relatable, Kiwi-flavoured. Prioritise cultural relevance, emotional resonance, and campaign utility.
-
 """
-    chat_response = ChatCompletion.create(
+    response = groq_client.chat.completions.create(
         model=GROQ_MODEL,
-        api_key=GROQ_API_KEY,
         messages=[{"role": "user", "content": chat_prompt}]
     )
-    st.chat_message("assistant").markdown(chat_response["choices"][0]["message"]["content"])
+    st.chat_message("assistant").markdown(response.choices[0].message.content)
