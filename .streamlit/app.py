@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from config import GROQ_API_KEY, GROQ_MODEL
-from data.static_data import df_today
+from utils.data.static_data import df_today
 from utils.clustering import cluster_keywords
 from utils.scoring import score_christmas_vibes
 from utils.velocity import detect_velocity, summarize_trends
