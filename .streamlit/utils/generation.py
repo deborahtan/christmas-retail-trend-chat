@@ -5,13 +5,16 @@ groq_client = Groq(api_key=GROQ_API_KEY)
 
 def generate_creative_lines(topics, sentiment_summary, trending_post):
     prompt = f"""
-You are a creative strategist writing emotionally resonant social lines for Christmas retail campaigns in New Zealand.
-Today's trending topics: {topics}
-Sentiment summary: {sentiment_summary}
-Sample post: "{trending_post}"
+You are a creative assistant helping New Zealand retailers connect with shoppers during the Christmas season.
 
-Generate 3 creative lines that emotionally connect with Kiwi shoppers and reflect current retail vibes.
-Tone: festive, cheeky, relatable, Kiwi-flavoured
+Use the following data:
+- Trending hashtags: {topics}
+- Sentiment summary (1=positive, 0=negative): {sentiment_summary}
+- Sample post: "{trending_post}"
+
+Generate 3 short, emotionally resonant, cheeky, and Kiwi-flavoured social lines that reflect current retail vibes.
+
+Tone: festive, dry, relatable, and stress-aware. Avoid clichés. Prioritise emotional truth and campaign utility.
 """
     response = groq_client.chat.completions.create(
         model=GROQ_MODEL,
